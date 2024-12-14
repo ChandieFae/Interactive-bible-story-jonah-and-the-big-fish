@@ -28,6 +28,7 @@
             padding: 15px;
             background-color: white;
             border-radius: 8px;
+            animation: fadeIn 0.5s;
         }
         .story-image {
             width: 100%;
@@ -56,12 +57,30 @@
             margin-top: 20px;
             color: #555;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .fade-out {
+            animation: fadeOut 0.5s;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Interactive Bible Story: Jonah and the Big Fish</h1>
     </header>
+
+    <!-- Background Music -->
+    <audio autoplay loop>
+        <source src="audio/background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <main>
         <div id="story" class="story-container">
             <img id="story-image" class="story-image" src="images/scene1.jpg" alt="Jonah under a tree with God speaking to him">
@@ -100,13 +119,17 @@
                 title: "Jonah in the Sea",
                 text: "The sailors threw Jonah into the sea, and the storm calmed. Jonah was swallowed by a big fish!",
                 image: "images/stormResolution.jpg",
-                nextChoices: null
+                nextChoices: [
+                    { text: "Replay the Story", next: "intro" }
+                ]
             },
             returnToNineveh: {
                 title: "Return to Nineveh",
                 text: "Jonah turned back to Nineveh and delivered God’s message as originally commanded.",
                 image: "images/returnToNineveh.jpg",
-                nextChoices: null
+                nextChoices: [
+                    { text: "Replay the Story", next: "intro" }
+                ]
             }
         };
 
@@ -115,25 +138,32 @@
             const storyText = document.getElementById("story-text");
             const storyImage = document.getElementById("story-image");
             const choicesContainer = document.getElementById("choices");
+            const storyContainer = document.getElementById("story");
 
-            const sceneData = storyData[choiceKey];
+            storyContainer.classList.add("fade-out");
 
-            // Update Story Content
-            storyTitle.textContent = sceneData.title;
-            storyText.textContent = sceneData.text;
-            storyImage.src = sceneData.image;
+            setTimeout(() => {
+                const sceneData = storyData[choiceKey];
 
-            // Update Choices
-            choicesContainer.innerHTML = "";
-            if (sceneData.nextChoices) {
-                sceneData.nextChoices.forEach((choice) => {
-                    const button = document.createElement("button");
-                    button.className = "choice-button";
-                    button.textContent = choice.text;
-                    button.onclick = () => goToScene(choice.next);
-                    choicesContainer.appendChild(button);
-                });
-            }
+                // Update Story Content
+                storyTitle.textContent = sceneData.title;
+                storyText.textContent = sceneData.text;
+                storyImage.src = sceneData.image;
+
+                // Update Choices
+                choicesContainer.innerHTML = "";
+                if (sceneData.nextChoices) {
+                    sceneData.nextChoices.forEach((choice) => {
+                        const button = document.createElement("button");
+                        button.className = "choice-button";
+                        button.textContent = choice.text;
+                        button.onclick = () => goToScene(choice.next);
+                        choicesContainer.appendChild(button);
+                    });
+                }
+
+                storyContainer.classList.remove("fade-out");
+            }, 500);
         }
     </script>
 </body>
