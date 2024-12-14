@@ -3,176 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Bible Story: Jonah and the Big Fish</title>
+    <title>Jonash and the Whale</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f9f9f9;
+            line-height: 1.6;
+            background-color: #eaf4fc;
             margin: 0;
             padding: 0;
+            color: #333;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 0;
-        }
-        main {
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
             padding: 20px;
-        }
-        .story-container {
-            margin: 20px auto;
-            max-width: 600px;
-            text-align: left;
-            border: 1px solid #ddd;
-            padding: 15px;
-            background-color: white;
+            background: #fff;
             border-radius: 8px;
-            animation: fadeIn 0.5s;
-        }
-        .story-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: contain;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .choices {
-            display: flex;
-            justify-content: space-around;
             margin-top: 20px;
         }
-        .choice-button {
+        .choices button {
             padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #4CAF50;
+            margin: 5px;
+            background-color: #007BFF;
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
         }
-        .choice-button:hover {
-            background-color: #45a049;
+        .choices button:hover {
+            background-color: #0056b3;
         }
-        footer {
-            margin-top: 20px;
-            color: #555;
+        .hidden {
+            display: none;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
         }
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-        .fade-out {
-            animation: fadeOut 0.5s;
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Interactive Bible Story: Jonah and the Big Fish</h1>
-    </header>
-
-    <!-- Background Music -->
-    <audio autoplay loop>
-        <source src="audio/background-music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <main>
-        <div id="story" class="story-container">
-            <img id="story-image" class="story-image" src="images/scene1.jpg" alt="Jonah under a tree with God speaking to him">
-            <h2 id="story-title">God Speaks to Jonah</h2>
-            <p id="story-text">God spoke to Jonah and gave him an important task.</p>
-            <p id="god-words">God’s Words: "Go to Nineveh and tell the people to stop doing bad things!"</p>
-            <div id="choices" class="choices">
-                <button class="choice-button" onclick="goToScene('choiceA')">Obey God and go to Nineveh</button>
-                <button class="choice-button" onclick="goToScene('choiceB')">Run away and board a ship</button>
+    <div class="container">
+        <h1>Jonash and the Whale</h1>
+        <div class="image-container">
+            <img src="scene1.jpg.webp" alt="A ship sailing on calm waters at sunrise." />
+        </div>
+        <p>You are Jonash, a sailor seeking redemption. You hear tales of Niveah, a city consumed by greed and corruption. One night, you have a dream of a great whale guiding you toward a chance to make things right.</p>
+        <div id="story">
+            <div class="image-container">
+                <img src="scene2.jpg.webp" alt="Jonash pondering his journey on the deck of his ship." />
+            </div>
+            <p>The morning sun rises. Will you sail to Niveah to confront its people, or will you avoid the challenge?</p>
+            <div class="choices">
+                <button onclick="goToNiveah()">Go to Niveah</button>
+                <button onclick="turnAround()">Turn the boat around</button>
+                <button onclick="jumpInWater()">Jump into the water</button>
             </div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Interactive Bible Story. All Rights Reserved.</p>
-    </footer>
+
+        <div id="niveah" class="hidden">
+            <div class="image-container">
+                <img src="scene2a.jpg.webp" alt="A dark and corrupted city, with signs of wealth and decay." />
+            </div>
+            <p>You arrive in Niveah and see the corruption firsthand. The people are wary but listen to your words about redemption. Over time, your actions inspire change, and the city begins to heal.</p>
+            <p><strong>Lesson:</strong> Facing challenges head-on can lead to meaningful change.</p>
+        </div>
+
+        <div id="turnAround" class="hidden">
+            <div class="image-container">
+                <img src="scene5.jpg.webp" alt="A massive whale breaching in a stormy sea, blocking the ship's path." />
+            </div>
+            <p>You choose to avoid Niveah, but a storm brews. The great whale appears, blocking your path. "You cannot run from your destiny," it says, guiding you back to Niveah.</p>
+            <p><strong>Lesson:</strong> Escaping responsibilities often leads you back to where you need to be.</p>
+        </div>
+
+        <div id="water" class="hidden">
+            <div class="image-container">
+                <img src="scene3.jpg.webp" alt="A surreal underwater world with glowing coral and the majestic whale." />
+            </div>
+            <p>You leap into the water and find yourself in a surreal underwater world. The whale speaks: "Only by immersing yourself in truth can you find redemption." You emerge, transformed and ready to face Niveah.</p>
+            <p><strong>Lesson:</strong> Self-discovery often requires taking bold, unexpected steps.</p>
+        </div>
+
+        <div id="redemption" class="hidden">
+            <div class="image-container">
+                <img src="scene4.jpg.webp" alt="A bright and hopeful cityscape with golden light breaking through." />
+            </div>
+            <p>Through your perseverance and courage, the people of Niveah are inspired to change. The city transforms into a beacon of hope and redemption.</p>
+            <p><strong>Lesson:</strong> Redemption is achieved through bravery, selflessness, and facing difficult truths.</p>
+        </div>
+
+        <button id="restart" class="hidden" onclick="restartStory()">Restart Story</button>
+    </div>
 
     <script>
-        const storyData = {
-            intro: {
-                title: "God Speaks to Jonah",
-                text: "God spoke to Jonah and gave him an important task. 'Go to Nineveh and tell the people to stop doing bad things!'",
-                image: "images/scene1.jpg",
-                choices: [
-                    { text: "Obey God and go to Nineveh", next: "choiceA" },
-                    { text: "Run away and board a ship", next: "choiceB" }
-                ]
-            },
-            choiceA: {
-                title: "Jonah Goes to Nineveh",
-                text: "Jonah decided to obey God. He traveled to Nineveh to deliver God’s message.",
-                image: "images/scene2A.jpg",
-                choices: [
-                    { text: "Replay the Story", next: "intro" }
-                ]
-            },
-            choiceB: {
-                title: "Jonah Runs Away",
-                text: "Jonah decided to run away. He boarded a ship heading far from Nineveh. But God sent a great storm to stop him!",
-                image: "images/scene2B.jpg",
-                choices: [
-                    { text: "Throw me into the sea.", next: "stormResolution" },
-                    { text: "Turn the ship around.", next: "returnToNineveh" }
-                ]
-            },
-            stormResolution: {
-                title: "Jonah in the Sea",
-                text: "The sailors threw Jonah into the sea, and the storm calmed. Jonah was swallowed by a big fish!",
-                image: "images/stormResolution.jpg",
-                choices: [
-                    { text: "Replay the Story", next: "intro" }
-                ]
-            },
-            returnToNineveh: {
-                title: "Jonah Returns to Nineveh",
-                text: "Jonah turned back to Nineveh and delivered God’s message as originally commanded.",
-                image: "images/returnToNineveh.jpg",
-                choices: [
-                    { text: "Replay the Story", next: "intro" }
-                ]
-            }
-        };
-
-        function goToScene(sceneKey) {
-            const story = storyData[sceneKey];
-            const storyContainer = document.getElementById("story");
-            const storyImage = document.getElementById("story-image");
-            const storyTitle = document.getElementById("story-title");
-            const storyText = document.getElementById("story-text");
-            const choicesContainer = document.getElementById("choices");
-
-            storyContainer.classList.add("fade-out");
-
-            setTimeout(() => {
-                storyTitle.textContent = story.title;
-                storyText.textContent = story.text;
-                storyImage.src = story.image;
-                choicesContainer.innerHTML = "";
-
-                story.choices.forEach(choice => {
-                    const button = document.createElement("button");
-                    button.className = "choice-button";
-                    button.textContent = choice.text;
-                    button.onclick = () => goToScene(choice.next);
-                    choicesContainer.appendChild(button);
-                });
-
-                storyContainer.classList.remove("fade-out");
-            }, 500);
+        function goToNiveah() {
+            document.getElementById('story').classList.add('hidden');
+            document.getElementById('niveah').classList.remove('hidden');
+            document.getElementById('restart').classList.remove('hidden');
         }
 
-        // Start the story
-        goToScene("intro");
+        function turnAround() {
+            document.getElementById('story').classList.add('hidden');
+            document.getElementById('turnAround').classList.remove('hidden');
+            document.getElementById('restart').classList.remove('hidden');
+        }
+
+        function jumpInWater() {
+            document.getElementById('story').classList.add('hidden');
+            document.getElementById('water').classList.remove('hidden');
+            document.getElementById('restart').classList.remove('hidden');
+        }
+
+        function restartStory() {
+            document.getElementById('story').classList.remove('hidden');
+            document.getElementById('niveah').classList.add('hidden');
+            document.getElementById('turnAround').classList.add('hidden');
+            document.getElementById('water').classList.add('hidden');
+            document.getElementById('redemption').classList.add('hidden');
+            document.getElementById('restart').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
