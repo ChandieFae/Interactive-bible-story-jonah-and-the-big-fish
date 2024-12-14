@@ -99,18 +99,28 @@
 
     <script>
         const storyData = {
+            intro: {
+                title: "God Speaks to Jonah",
+                text: "God spoke to Jonah and gave him an important task. 'Go to Nineveh and tell the people to stop doing bad things!'",
+                image: "images/scene1.jpg",
+                choices: [
+                    { text: "Obey God and go to Nineveh", next: "choiceA" },
+                    { text: "Run away and board a ship", next: "choiceB" }
+                ]
+            },
             choiceA: {
                 title: "Jonah Goes to Nineveh",
                 text: "Jonah decided to obey God. He traveled to Nineveh to deliver God’s message.",
                 image: "images/scene2A.jpg",
-                nextChoices: null,
-                narration: "Jonah to the crowd: 'Stop doing bad things and turn back to God. He will forgive you if you change your ways!'"
+                choices: [
+                    { text: "Replay the Story", next: "intro" }
+                ]
             },
             choiceB: {
                 title: "Jonah Runs Away",
                 text: "Jonah decided to run away. He boarded a ship heading far from Nineveh. But God sent a great storm to stop him!",
                 image: "images/scene2B.jpg",
-                nextChoices: [
+                choices: [
                     { text: "Throw me into the sea.", next: "stormResolution" },
                     { text: "Turn the ship around.", next: "returnToNineveh" }
                 ]
@@ -119,52 +129,50 @@
                 title: "Jonah in the Sea",
                 text: "The sailors threw Jonah into the sea, and the storm calmed. Jonah was swallowed by a big fish!",
                 image: "images/stormResolution.jpg",
-                nextChoices: [
+                choices: [
                     { text: "Replay the Story", next: "intro" }
                 ]
             },
             returnToNineveh: {
-                title: "Return to Nineveh",
+                title: "Jonah Returns to Nineveh",
                 text: "Jonah turned back to Nineveh and delivered God’s message as originally commanded.",
                 image: "images/returnToNineveh.jpg",
-                nextChoices: [
+                choices: [
                     { text: "Replay the Story", next: "intro" }
                 ]
             }
         };
 
-        function goToScene(choiceKey) {
+        function goToScene(sceneKey) {
+            const story = storyData[sceneKey];
+            const storyContainer = document.getElementById("story");
+            const storyImage = document.getElementById("story-image");
             const storyTitle = document.getElementById("story-title");
             const storyText = document.getElementById("story-text");
-            const storyImage = document.getElementById("story-image");
             const choicesContainer = document.getElementById("choices");
-            const storyContainer = document.getElementById("story");
 
             storyContainer.classList.add("fade-out");
 
             setTimeout(() => {
-                const sceneData = storyData[choiceKey];
-
-                // Update Story Content
-                storyTitle.textContent = sceneData.title;
-                storyText.textContent = sceneData.text;
-                storyImage.src = sceneData.image;
-
-                // Update Choices
+                storyTitle.textContent = story.title;
+                storyText.textContent = story.text;
+                storyImage.src = story.image;
                 choicesContainer.innerHTML = "";
-                if (sceneData.nextChoices) {
-                    sceneData.nextChoices.forEach((choice) => {
-                        const button = document.createElement("button");
-                        button.className = "choice-button";
-                        button.textContent = choice.text;
-                        button.onclick = () => goToScene(choice.next);
-                        choicesContainer.appendChild(button);
-                    });
-                }
+
+                story.choices.forEach(choice => {
+                    const button = document.createElement("button");
+                    button.className = "choice-button";
+                    button.textContent = choice.text;
+                    button.onclick = () => goToScene(choice.next);
+                    choicesContainer.appendChild(button);
+                });
 
                 storyContainer.classList.remove("fade-out");
             }, 500);
         }
+
+        // Start the story
+        goToScene("intro");
     </script>
 </body>
 </html>
