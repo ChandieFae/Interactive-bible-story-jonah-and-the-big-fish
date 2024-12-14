@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Bible Story: Jonah and the Big Fish</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        main {
+            padding: 20px;
+        }
+        .story-container {
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+        }
+        .story-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .choice-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .choice-button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive Bible Story: Jonah and the Big Fish</h1>
+    </header>
+    <main>
+        <div id="story" class="story-container">
+            <img id="story-image" class="story-image" src="images/scene1.jpg" alt="Jonah under a tree with God speaking to him">
+            <h2 id="story-title">God Speaks to Jonah</h2>
+            <p id="story-text">God spoke to Jonah and gave him an important task.</p>
+            <p id="god-words">God’s Words: "Go to Nineveh and tell the people to stop doing bad things!"</p>
+            <div id="choices" class="choices">
+                <button class="choice-button" onclick="goToScene('choiceA')">Obey God and go to Nineveh</button>
+                <button class="choice-button" onclick="goToScene('choiceB')">Run away and board a ship</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Interactive Bible Story. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const storyData = {
+            choiceA: {
+                title: "Jonah Goes to Nineveh",
+                text: "Jonah decided to obey God. He traveled to Nineveh to deliver God’s message.",
+                image: "images/scene2A.jpg",
+                nextChoices: null,
+                narration: "Jonah to the crowd: 'Stop doing bad things and turn back to God. He will forgive you if you change your ways!'"
+            },
+            choiceB: {
+                title: "Jonah Runs Away",
+                text: "Jonah decided to run away. He boarded a ship heading far from Nineveh. But God sent a great storm to stop him!",
+                image: "images/scene2B.jpg",
+                nextChoices: [
+                    { text: "Throw me into the sea.", next: "stormResolution" },
+                    { text: "Turn the ship around.", next: "returnToNineveh" }
+                ]
+            },
+            stormResolution: {
+                title: "Jonah in the Sea",
+                text: "The sailors threw Jonah into the sea, and the storm calmed. Jonah was swallowed by a big fish!",
+                image: "images/stormResolution.jpg",
+                nextChoices: null
+            },
+            returnToNineveh: {
+                title: "Return to Nineveh",
+                text: "Jonah turned back to Nineveh and delivered God’s message as originally commanded.",
+                image: "images/returnToNineveh.jpg",
+                nextChoices: null
+            }
+        };
+
+        function goToScene(choiceKey) {
+            const storyTitle = document.getElementById("story-title");
+            const storyText = document.getElementById("story-text");
+            const storyImage = document.getElementById("story-image");
+            const choicesContainer = document.getElementById("choices");
+
+            const sceneData = storyData[choiceKey];
+
+            // Update Story Content
+            storyTitle.textContent = sceneData.title;
+            storyText.textContent = sceneData.text;
+            storyImage.src = sceneData.image;
+
+            // Update Choices
+            choicesContainer.innerHTML = "";
+            if (sceneData.nextChoices) {
+                sceneData.nextChoices.forEach((choice) => {
+                    const button = document.createElement("button");
+                    button.className = "choice-button";
+                    button.textContent = choice.text;
+                    button.onclick = () => goToScene(choice.next);
+                    choicesContainer.appendChild(button);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
