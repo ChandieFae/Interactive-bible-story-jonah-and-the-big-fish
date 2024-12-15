@@ -47,8 +47,8 @@
     <div id="scene1" class="scene active">
         <p>God tells Jonah to go to Nineveh and deliver His message. What should Jonah do?</p>
         <div class="choice-container">
-            <a href="#" class="choice" onclick="goToScene('scene2A')">Obey God and go to Nineveh</a>
-            <a href="#" class="choice" onclick="goToScene('scene2B')">Run away and board a ship</a>
+            <button class="choice" onclick="goToScene('scene2A')">Obey God and go to Nineveh</button>
+            <button class="choice" onclick="goToScene('scene2B')">Run away and board a ship</button>
         </div>
     </div>
 
@@ -56,14 +56,15 @@
     <div id="scene2A" class="scene">
         <p>Jonah obeys God and goes to Nineveh. He delivers God's message, and the people repent and turn back to God.</p>
         <p>Lesson: Obedience brings blessings.</p>
+        <button class="choice" onclick="goToScene('scene1')">Restart</button>
     </div>
 
     <!-- Scene 2B -->
     <div id="scene2B" class="scene">
         <p>Jonah runs away and boards a ship. A terrible storm arises, and the sailors ask Jonah what to do.</p>
         <div class="choice-container">
-            <a href="#" class="choice" onclick="goToScene('scene3A')">Throw Jonah into the sea</a>
-            <a href="#" class="choice" onclick="goToScene('scene3B')">Try to row back to shore</a>
+            <button class="choice" onclick="goToScene('scene3A')">Throw Jonah into the sea</button>
+            <button class="choice" onclick="goToScene('scene3B')">Try to row back to shore</button>
         </div>
     </div>
 
@@ -71,12 +72,13 @@
     <div id="scene3A" class="scene">
         <p>The sailors throw Jonah into the sea, and the storm calms. Jonah is swallowed by a giant fish, and he prays for forgiveness inside the fish.</p>
         <p>After three days, the fish spits Jonah out onto dry land, and he goes to Nineveh to deliver God's message.</p>
+        <button class="choice" onclick="goToScene('scene1')">Restart</button>
     </div>
 
     <!-- Scene 3B -->
     <div id="scene3B" class="scene">
         <p>The sailors try to row back to shore, but the storm worsens. They realize they must follow Jonah's advice and throw him into the sea.</p>
-        <a href="#" class="choice" onclick="goToScene('scene3A')">Continue</a>
+        <button class="choice" onclick="goToScene('scene3A')">Continue</button>
     </div>
 
     <script>
