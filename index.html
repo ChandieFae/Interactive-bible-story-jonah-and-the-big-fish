@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,21 +21,7 @@
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .choices {
-            margin-top: 20px;
-        }
-        .choices button {
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .choices button:hover {
-            background-color: #0056b3;
+            transition: opacity 0.5s ease-in-out;
         }
         .hidden {
             display: none;
@@ -48,6 +35,18 @@
             height: auto;
             border-radius: 8px;
         }
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .next-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -57,95 +56,62 @@
         Your browser does not support the audio element.
     </audio>
 
-    <div class="container">
+    <div class="container" id="scene1">
         <h1>Jonah and the Whale</h1>
         <div class="image-container">
             <img src="images/scene1.jpg" alt="A ship sailing on calm waters at sunrise." />
         </div>
-        <p>You are Jonah, a sailor seeking redemption. You hear tales of Niveah, a city consumed by greed and corruption. One night, you have a dream of a great whale guiding you toward a chance to make things right.</p>
-        <div id="story">
-            <div class="image-container">
-                <img src="images/scene2A.jpg" alt="Jonah pondering his journey on the deck of his ship." />
-            </div>
-            <p>The morning sun rises. Will you sail to Niveah to confront its people, or will you avoid the challenge?</p>
-            <div class="choices">
-                <button onclick="goToNiveah()">Go to Niveah</button>
-                <button onclick="turnAround()">Turn the boat around</button>
-                <button onclick="jumpInWater()">Jump into the water</button>
-            </div>
-        </div>
+        <p>You are Jonah, a sailor seeking redemption. One night, you have a dream of a great whale guiding you toward a chance to make things right.</p>
+        <button class="next-button" onclick="showScene(2)">Next</button>
+    </div>
 
-        <div id="niveah" class="hidden">
-            <div class="image-container">
-                <img src="images/scene2B.jpg" alt="A dark and corrupted city, with signs of wealth and decay." />
-            </div>
-            <p>You arrive in Niveah and see the corruption firsthand. The people are wary but listen to your words about redemption. Over time, your actions inspire change, and the city begins to heal.</p>
-            <p><strong>Lesson:</strong> Facing challenges head-on can lead to meaningful change.</p>
+    <div class="container hidden" id="scene2">
+        <div class="image-container">
+            <img src="images/scene2A.jpg" alt="Jonah pondering his journey on the deck of his ship." />
         </div>
+        <p>The morning sun rises. Will you sail to Niveah, the city consumed by greed, to confront its people and seek redemption?</p>
+        <button class="next-button" onclick="showScene(3)">Next</button>
+    </div>
 
-        <div id="turnAround" class="hidden">
-            <div class="image-container">
-                <img src="images/stormResolution.jpg" alt="A massive whale breaching in a stormy sea, blocking the ship's path." />
-            </div>
-            <p>You choose to avoid Niveah, but a storm brews. The great whale appears, blocking your path. "You cannot run from your destiny," it says, guiding you back to Niveah.</p>
-            <p><strong>Lesson:</strong> Escaping responsibilities often leads you back to where you need to be.</p>
+    <div class="container hidden" id="scene3">
+        <div class="image-container">
+            <img src="images/stormResolution.jpg" alt="A massive whale breaching in a stormy sea." />
         </div>
+        <p>As a storm brews, the great whale emerges. Its voice echoes: "You cannot run from your destiny."</p>
+        <button class="next-button" onclick="showScene(4)">Next</button>
+    </div>
 
-        <div id="water" class="hidden">
-            <div class="image-container">
-                <img src="images/returnToNineveh.jpg" alt="A surreal underwater world with glowing coral and the majestic whale." />
-            </div>
-            <p>You leap into the water and find yourself in a surreal underwater world. The whale speaks: "Only by immersing yourself in truth can you find redemption." You emerge, transformed and ready to face Niveah.</p>
-            <p><strong>Lesson:</strong> Self-discovery often requires taking bold, unexpected steps.</p>
+    <div class="container hidden" id="scene4">
+        <div class="image-container">
+            <img src="images/underwaterVision.jpg" alt="Jonah having a vision underwater." />
         </div>
+        <p>Thrown into the water, Jonah experiences a vision of the whale guiding him. "Face your fears, and redemption will follow," it whispers.</p>
+        <button class="next-button" onclick="showScene(5)">Next</button>
+    </div>
 
-        <div id="redemption" class="hidden">
-            <div class="image-container">
-                <img src="images/returnToNineveh.jpg" alt="A bright and hopeful cityscape with golden light breaking through." />
-            </div>
-            <p>Through your perseverance and courage, the people of Niveah are inspired to change. The city transforms into a beacon of hope and redemption.</p>
-            <p><strong>Lesson:</strong> Redemption is achieved through bravery, selflessness, and facing difficult truths.</p>
+    <div class="container hidden" id="scene5">
+        <div class="image-container">
+            <img src="images/returnToNineveh.jpg" alt="A bright and hopeful cityscape." />
         </div>
-
-        <div id="underwaterVision" class="hidden">
-            <div class="image-container">
-                <img src="images/underwaterVision.jpg" alt="Jonah having a vision underwater of the great whale guiding him." />
-            </div>
-            <p>While underwater, Jonah experiences a vision of the great whale guiding him to confront his fears. The vision reveals that redemption lies in his courage to face his past and take responsibility for the future.</p>
-            <p><strong>Lesson:</strong> True guidance often comes from within, inspired by moments of reflection.</p>
-        </div>
-
-        <button id="restart" class="hidden" onclick="restartStory()">Restart Story</button>
+        <p>Jonah returns to Niveah. Inspired by his courage, the people change their ways, and the city becomes a beacon of hope.</p>
+        <p><strong>Lesson:</strong> Redemption is achieved through bravery, selflessness, and facing difficult truths.</p>
+        <button class="next-button" onclick="restartStory()">Restart Story</button>
     </div>
 
     <script>
-        function goToNiveah() {
-            document.getElementById('story').classList.add('hidden');
-            document.getElementById('niveah').classList.remove('hidden');
-            document.getElementById('restart').classList.remove('hidden');
+        // Function to transition between scenes
+        function showScene(sceneNumber) {
+            const currentScene = document.querySelector('.container:not(.hidden)');
+            const nextScene = document.getElementById(`scene${sceneNumber}`);
+            currentScene.classList.add('hidden');
+            nextScene.classList.remove('hidden');
         }
 
-        function turnAround() {
-            document.getElementById('story').classList.add('hidden');
-            document.getElementById('turnAround').classList.remove('hidden');
-            document.getElementById('restart').classList.remove('hidden');
-        }
-
-        function jumpInWater() {
-            document.getElementById('story').classList.add('hidden');
-            document.getElementById('water').classList.remove('hidden');
-            document.getElementById('underwaterVision').classList.remove('hidden');
-            document.getElementById('restart').classList.remove('hidden');
-        }
-
+        // Restart story from the beginning
         function restartStory() {
-            document.getElementById('story').classList.remove('hidden');
-            document.getElementById('niveah').classList.add('hidden');
-            document.getElementById('turnAround').classList.add('hidden');
-            document.getElementById('water').classList.add('hidden');
-            document.getElementById('underwaterVision').classList.add('hidden');
-            document.getElementById('redemption').classList.add('hidden');
-            document.getElementById('restart').classList.add('hidden');
+            const scenes = document.querySelectorAll('.container');
+            scenes.forEach(scene => scene.classList.add('hidden'));
+            document.getElementById('scene1').classList.remove('hidden');
         }
     </script>
 </body>
