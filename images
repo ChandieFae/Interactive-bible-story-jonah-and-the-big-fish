@@ -1,11 +1,10 @@
 project-folder/
 ├── index.html
 ├── images/
-    ├── scene1.jpg
-    ├── scene2A.jpg
-    ├── scene2B.jpg
-    ├── stormResolution.jpg
-    ├── returnToNineveh.jpg
-    ├── underwaterVision.jpg
+│   ├── scene1.jpg
+│   ├── scene2A.jpg
+│   ├── stormResolution.jpg
+│   ├── underwaterVision.jpg
+│   ├── returnToNineveh.jpg
 ├── audio/
-    ├── background-music.mp3
+│   ├── background-music.mp3
