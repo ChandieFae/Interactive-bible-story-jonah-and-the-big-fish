@@ -3,46 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Jonah and the Whale Story</title>
+    <title>Jonah and the Whale Interactive Story</title>
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f3f3f3;
-            text-align: center;
-        }
-        .scene {
-            display: none;
             padding: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
         }
-        .active {
-            display: block;
+
+        .scene {
+            display: none; /* Hide all scenes by default */
         }
+
+        .scene.active {
+            display: block; /* Show only the active scene */
+        }
+
         .choice-container {
             margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
         }
+
         .choice {
-            padding: 15px 30px;
-            background-color: #007BFF;
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007bff;
             color: white;
             text-decoration: none;
-            font-size: 18px;
+            border: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
         }
+
         .choice:hover {
             background-color: #0056b3;
+        }
+
+        /* End Scene Styling */
+        #sceneEnd ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        #sceneEnd ul li {
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
-
-    <h1>Jonah and the Whale</h1>
-
     <!-- Scene 1 -->
     <div id="scene1" class="scene active">
         <p>God tells Jonah to go to Nineveh and deliver His message. What should Jonah do?</p>
@@ -56,7 +68,10 @@
     <div id="scene2A" class="scene">
         <p>Jonah obeys God and goes to Nineveh. He delivers God's message, and the people repent and turn back to God.</p>
         <p>Lesson: Obedience brings blessings.</p>
-        <button class="choice" onclick="goToScene('scene1')">Restart</button>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('sceneEnd')">Go to End</button>
+            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
+        </div>
     </div>
 
     <!-- Scene 2B -->
@@ -72,25 +87,68 @@
     <div id="scene3A" class="scene">
         <p>The sailors throw Jonah into the sea, and the storm calms. Jonah is swallowed by a giant fish, and he prays for forgiveness inside the fish.</p>
         <p>After three days, the fish spits Jonah out onto dry land, and he goes to Nineveh to deliver God's message.</p>
-        <button class="choice" onclick="goToScene('scene1')">Restart</button>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('sceneEnd')">Go to End</button>
+            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
+        </div>
     </div>
 
     <!-- Scene 3B -->
     <div id="scene3B" class="scene">
         <p>The sailors try to row back to shore, but the storm worsens. They realize they must follow Jonah's advice and throw him into the sea.</p>
-        <button class="choice" onclick="goToScene('scene3A')">Continue</button>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('scene3A')">Continue</button>
+        </div>
     </div>
 
+    <!-- End Scene -->
+    <div id="sceneEnd" class="scene">
+        <p>Thank you for experiencing the story of Jonah and the Whale!</p>
+        <p>Lesson: Trust and obedience to God lead to blessings and forgiveness.</p>
+        <ul>
+            <li>Obeying God's call can bring blessings to others and yourself.</li>
+            <li>Running away from responsibility can lead to challenges, but repentance offers redemption.</li>
+        </ul>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
+            <button class="choice" onclick="goToScene('sceneReflection')">Reflection</button>
+        </div>
+    </div>
+
+    <!-- Reflection Scene -->
+    <div id="sceneReflection" class="scene">
+        <p>Take a moment to reflect:</p>
+        <ul>
+            <li>What can we learn from Jonah’s journey?</li>
+            <li>How does this story inspire obedience and trust?</li>
+        </ul>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Scene Navigation -->
     <script>
         function goToScene(sceneId) {
-            // Hide all scenes
-            document.querySelectorAll('.scene').forEach(scene => {
-                scene.classList.remove('active');
-            });
-            // Show the selected scene
-            document.getElementById(sceneId).classList.add('active');
-        }
-    </script>
+            // Get all scenes and hide them
+            const scenes = document.querySelectorAll('.scene');
+            scenes.forEach(scene => scene.classList.remove('active'));
 
+            // Show the target scene
+            const targetScene = document.getElementById(sceneId);
+            if (targetScene) {
+                targetScene.classList.add('active');
+            }
+        }
+
+        // Initialize the first scene
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstScene = document.querySelector('.scene');
+            if (firstScene) {
+                firstScene.classList.add('active');
+            }
+        });
+    </script>
 </body>
 </html>
+
