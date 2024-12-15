@@ -61,7 +61,7 @@
         storyDiv.innerHTML = `
           <div class="scene">
             <p>Jonah walks on a dusty road, his heart heavy with the task ahead. He arrives at Nineveh, a bustling city full of people.</p>
-            <img src="images/preaching-nineveh.jpg" alt="Jonah preaching in Nineveh">
+            <img src="images/preaching-nineveh.webp" alt="Jonah preaching in Nineveh">
             <p>Jonah (thinking): "This is a difficult message to deliver, but I must do what God has asked."</p>
             <p>Jonah to the crowd: "Stop doing wrong and turn to God, or Nineveh will be destroyed in forty days!"</p>
             <p>The people of Nineveh listen to Jonah. They fast, pray, and turn away from their wicked ways. God forgives them, and Jonah learns that obedience can bring blessings.</p>
@@ -75,7 +75,7 @@
         storyDiv.innerHTML = `
           <div class="scene">
             <p>Jonah flees to Joppa and boards a ship heading in the opposite direction. As the ship sails, a terrible storm arises.</p>
-            <img src="images/stormy-seas.jpg" alt="Stormy seas with Jonah's ship">
+            <img src="images/stormy-seas.webp" alt="Stormy seas with Jonah's ship">
             <p>Sailors (panicked): "The storm is too strong! What should we do?"</p>
             <p>Jonah (guilty): "This is my fault. I disobeyed God. Throw me into the sea, and the storm will stop."</p>
             <p>What should the sailors do?</p>
@@ -110,13 +110,27 @@
         storyDiv.innerHTML = `
           <div class="scene">
             <p>The sailors row with all their might, but the storm only grows worse. They realize they cannot escape God’s power.</p>
-            <img src="images/stormy-seas.jpg" alt="Sailors rowing hard in the storm">
+            <img src="images/stormy-seas.webp" alt="Sailors rowing hard in the storm">
             <p>Sailors (desperate): "We have no choice! We must do as Jonah says."</p>
+            <p>Reluctantly, they throw Jonah into the sea, just as he instructed.</p>
           </div>
         `;
+
         setTimeout(() => {
-          chooseSailorAction('Throw');
-        }, 2000);
+          storyDiv.innerHTML = `
+            <div class="scene">
+              <p>The storm calms immediately after Jonah is thrown into the sea. Jonah sinks beneath the waves but is swallowed by a giant fish.</p>
+              <img src="images/whale-swallowing-jonah.jpg" alt="Jonah swallowed by a whale">
+              <p>Inside the Fish: Jonah kneels in the darkness, surrounded by water and seaweed.</p>
+              <p>Jonah: "God, I am sorry for running away. I will obey you. Please save me!"</p>
+              <p>After three days, the fish spits Jonah onto dry land. Jonah goes to Nineveh, delivers God’s message, and sees the people repent.</p>
+              <p><strong>Moral:</strong> Disobedience has consequences, but repentance brings God's mercy.</p>
+            </div>
+            <div class="buttons">
+              <button onclick="replay()">Replay Story</button>
+            </div>
+          `;
+        }, 4000); // Delayed transition
       }
     }
 
