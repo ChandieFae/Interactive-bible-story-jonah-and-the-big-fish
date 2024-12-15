@@ -6,51 +6,104 @@
   <title>Jonah and the Whale - Interactive Story</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      color: #343a40;
+      font-family: "Comic Sans MS", Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #fdd835;
+      color: #000;
       padding: 20px;
       text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .scene {
-      margin: 20px 0;
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-family: "Trebuchet MS", Arial, sans-serif;
     }
+
+    .story-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .scene p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
     img {
       max-width: 100%;
       height: auto;
       margin: 20px 0;
-      border: 1px solid #ccc;
       border-radius: 10px;
     }
+
     .buttons {
       margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
     }
+
     button {
-      margin: 5px;
-      padding: 10px 20px;
-      background-color: #007bff;
+      font-family: "Comic Sans MS", Arial, sans-serif;
+      background-color: #4caf50;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1rem;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background-color: #45a049;
+    }
+
+    footer {
+      background-color: #fdd835;
+      color: #000;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>Jonah and the Whale - A Story of Obedience and Mercy</h1>
-  <div id="story">
+  <header>
+    <h1>Jonah and the Whale</h1>
+    <p>An Interactive Story for Children</p>
+  </header>
+
+  <div class="story-container" id="story">
     <div class="scene" id="scene1">
       <p>Long ago, God called upon a man named Jonah with an important task. "Go to Nineveh," God said, "and tell the people to stop their wicked ways!" But Jonah wasn’t sure he wanted to follow God's command. What should Jonah do?</p>
       <img src="images/god-calling-jonah.jpg" alt="God calling Jonah">
       <div class="buttons">
-        <button onclick="choosePath('Nineveh')">Obey God and go to Nineveh</button>
-        <button onclick="choosePath('Ship')">Run away and board a ship</button>
+        <button onclick="choosePath('Nineveh')">Obey God</button>
+        <button onclick="choosePath('Ship')">Run Away</button>
       </div>
     </div>
   </div>
+
+  <footer>
+    Jonah and the Whale Story | Interactive for Kids © 2024
+  </footer>
 
   <script>
     function choosePath(choice) {
@@ -60,28 +113,25 @@
       if (choice === 'Nineveh') {
         storyDiv.innerHTML = `
           <div class="scene">
-            <p>Jonah walks on a dusty road, his heart heavy with the task ahead. He arrives at Nineveh, a bustling city full of people.</p>
-            <img src="images/preaching-nineveh.webp" alt="Jonah preaching in Nineveh">
-            <p>Jonah (thinking): "This is a difficult message to deliver, but I must do what God has asked."</p>
-            <p>Jonah to the crowd: "Stop doing wrong and turn to God, or Nineveh will be destroyed in forty days!"</p>
-            <p>The people of Nineveh listen to Jonah. They fast, pray, and turn away from their wicked ways. God forgives them, and Jonah learns that obedience can bring blessings.</p>
-            <p><strong>Moral:</strong> Obedience to God brings blessings and helps others experience His mercy.</p>
-          </div>
-          <div class="buttons">
-            <button onclick="replay()">Replay Story</button>
+            <p>Jonah decided to obey God. He walked to Nineveh, a big city full of people who needed to hear God's message.</p>
+            <img src="images/preaching-nineveh.jpg" alt="Jonah preaching in Nineveh">
+            <p>Jonah said to the people, "Turn to God and stop doing wrong, or Nineveh will be destroyed in 40 days!"</p>
+            <p>The people listened. They prayed, fasted, and changed their ways. God forgave them.</p>
+            <p><strong>Moral:</strong> Listening to God can bring blessings!</p>
+            <div class="buttons">
+              <button onclick="replay()">Replay Story</button>
+            </div>
           </div>
         `;
       } else if (choice === 'Ship') {
         storyDiv.innerHTML = `
           <div class="scene">
-            <p>Jonah flees to Joppa and boards a ship heading in the opposite direction. As the ship sails, a terrible storm arises.</p>
-            <img src="images/stormy-seas.webp" alt="Stormy seas with Jonah's ship">
-            <p>Sailors (panicked): "The storm is too strong! What should we do?"</p>
-            <p>Jonah (guilty): "This is my fault. I disobeyed God. Throw me into the sea, and the storm will stop."</p>
-            <p>What should the sailors do?</p>
+            <p>Jonah decided to run away. He boarded a ship to sail far from Nineveh, but a terrible storm came!</p>
+            <img src="images/stormy-seas.jpg" alt="A ship in a stormy sea">
+            <p>The sailors were scared. Jonah told them, "Throw me into the sea, and the storm will stop."</p>
             <div class="buttons">
-              <button onclick="chooseSailorAction('Throw')">Throw Jonah into the sea</button>
-              <button onclick="chooseSailorAction('Row')">Try to row back to shore</button>
+              <button onclick="chooseSailorAction('Throw')">Throw Jonah</button>
+              <button onclick="chooseSailorAction('Row')">Try to Row Back</button>
             </div>
           </div>
         `;
@@ -95,42 +145,28 @@
       if (action === 'Throw') {
         storyDiv.innerHTML = `
           <div class="scene">
-            <p>The sailors reluctantly throw Jonah into the raging waters. Immediately, the storm calms. Jonah sinks beneath the waves but is swallowed by a giant fish.</p>
-            <img src="images/whale-swallowing-jonah.jpg" alt="Jonah swallowed by a whale">
-            <p>Inside the Fish: Jonah kneels in the darkness, surrounded by water and seaweed.</p>
-            <p>Jonah: "God, I am sorry for running away. I will obey you. Please save me!"</p>
-            <p>After three days, the fish spits Jonah onto dry land. Jonah goes to Nineveh, delivers God’s message, and sees the people repent.</p>
-            <p><strong>Moral:</strong> Disobedience has consequences, but repentance brings God's mercy.</p>
-          </div>
-          <div class="buttons">
-            <button onclick="replay()">Replay Story</button>
+            <p>The sailors threw Jonah into the sea. The storm stopped, but Jonah sank beneath the waves!</p>
+            <img src="images/whale-swallowing-jonah.jpg" alt="Jonah being swallowed by a whale">
+            <p>Jonah was swallowed by a huge fish! Inside the fish, he prayed, "God, I’m sorry for running away. I’ll do what you asked."</p>
+            <p>After three days, the fish spat Jonah onto dry land. He went to Nineveh to share God’s message.</p>
+            <p><strong>Moral:</strong> Obeying God can save us from trouble.</p>
+            <div class="buttons">
+              <button onclick="replay()">Replay Story</button>
+            </div>
           </div>
         `;
       } else if (action === 'Row') {
         storyDiv.innerHTML = `
           <div class="scene">
-            <p>The sailors row with all their might, but the storm only grows worse. They realize they cannot escape God’s power.</p>
-            <img src="images/stormy-seas.webp" alt="Sailors rowing hard in the storm">
-            <p>Sailors (desperate): "We have no choice! We must do as Jonah says."</p>
-            <p>Reluctantly, they throw Jonah into the sea, just as he instructed.</p>
+            <p>The sailors tried to row back to shore, but the storm only grew stronger. They had no choice but to do as Jonah said.</p>
+            <p>They threw Jonah into the sea. The storm stopped, and Jonah was swallowed by a giant fish!</p>
+            <img src="images/whale-swallowing-jonah.jpg" alt="Jonah being swallowed by a whale">
           </div>
         `;
 
         setTimeout(() => {
-          storyDiv.innerHTML = `
-            <div class="scene">
-              <p>The storm calms immediately after Jonah is thrown into the sea. Jonah sinks beneath the waves but is swallowed by a giant fish.</p>
-              <img src="images/whale-swallowing-jonah.jpg" alt="Jonah swallowed by a whale">
-              <p>Inside the Fish: Jonah kneels in the darkness, surrounded by water and seaweed.</p>
-              <p>Jonah: "God, I am sorry for running away. I will obey you. Please save me!"</p>
-              <p>After three days, the fish spits Jonah onto dry land. Jonah goes to Nineveh, delivers God’s message, and sees the people repent.</p>
-              <p><strong>Moral:</strong> Disobedience has consequences, but repentance brings God's mercy.</p>
-            </div>
-            <div class="buttons">
-              <button onclick="replay()">Replay Story</button>
-            </div>
-          `;
-        }, 4000); // Delayed transition
+          chooseSailorAction('Throw');
+        }, 4000);
       }
     }
 
@@ -141,8 +177,8 @@
           <p>Long ago, God called upon a man named Jonah with an important task. "Go to Nineveh," God said, "and tell the people to stop their wicked ways!" But Jonah wasn’t sure he wanted to follow God's command. What should Jonah do?</p>
           <img src="images/god-calling-jonah.jpg" alt="God calling Jonah">
           <div class="buttons">
-            <button onclick="choosePath('Nineveh')">Obey God and go to Nineveh</button>
-            <button onclick="choosePath('Ship')">Run away and board a ship</button>
+            <button onclick="choosePath('Nineveh')">Obey God</button>
+            <button onclick="choosePath('Ship')">Run Away</button>
           </div>
         </div>
       `;
@@ -150,3 +186,12 @@
   </script>
 </body>
 </html>
+
+/project-root
+  /images
+    god-calling-jonah.jpg
+    stormy-seas.jpg
+    whale-swallowing-jonah.jpg
+    preaching-nineveh.jpg
+  index.html
+
