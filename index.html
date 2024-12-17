@@ -7,15 +7,16 @@
     <style>
         /* General Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f8f9fa;
-            color: #343a40;
+            background-color: #f0f8ff;
+            color: #333;
         }
 
         .scene {
             display: none; /* Hide all scenes by default */
+            animation: fadeIn 1s ease-in-out;
         }
 
         .scene.active {
@@ -29,8 +30,8 @@
         .choice {
             margin: 5px;
             padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+            background-color: #ffcc00;
+            color: #333;
             text-decoration: none;
             border: none;
             border-radius: 5px;
@@ -40,17 +41,25 @@
         }
 
         .choice:hover {
-            background-color: #0056b3;
+            background-color: #ffdd44;
         }
 
-        /* End Scene Styling */
-        #sceneEnd ul {
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Log Section */
+        #choiceLog {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+
+        #sceneEnd ul, #sceneReflection ul {
             list-style-type: square;
             padding-left: 20px;
-        }
-
-        #sceneEnd ul li {
-            margin: 10px 0;
         }
     </style>
 </head>
@@ -70,7 +79,6 @@
         <p>Lesson: Obedience brings blessings.</p>
         <div class="choice-container">
             <button class="choice" onclick="goToScene('sceneEnd')">Go to End</button>
-            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
         </div>
     </div>
 
@@ -89,7 +97,6 @@
         <p>After three days, the fish spits Jonah out onto dry land, and he goes to Nineveh to deliver God's message.</p>
         <div class="choice-container">
             <button class="choice" onclick="goToScene('sceneEnd')">Go to End</button>
-            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
         </div>
     </div>
 
@@ -101,21 +108,7 @@
         </div>
     </div>
 
-    <!-- End Scene -->
-    <div id="sceneEnd" class="scene">
-        <p>Thank you for experiencing the story of Jonah and the Whale!</p>
-        <p>Lesson: Trust and obedience to God lead to blessings and forgiveness.</p>
-        <ul>
-            <li>Obeying God's call can bring blessings to others and yourself.</li>
-            <li>Running away from responsibility can lead to challenges, but repentance offers redemption.</li>
-        </ul>
-        <div class="choice-container">
-            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
-            <button class="choice" onclick="goToScene('sceneReflection')">Reflection</button>
-        </div>
-    </div>
-
-    <!-- Reflection Scene -->
+    <!-- Scene Reflection -->
     <div id="sceneReflection" class="scene">
         <p>Take a moment to reflect:</p>
         <ul>
@@ -124,31 +117,79 @@
         </ul>
         <div class="choice-container">
             <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
+            <button class="choice" onclick="goToScene('sceneQuiz')">Take the Quiz</button>
         </div>
     </div>
 
-    <!-- JavaScript for Scene Navigation -->
+    <!-- End Scene -->
+    <div id="sceneEnd" class="scene">
+        <p>Thank you for experiencing the story of Jonah and the Whale!</p>
+        <p>Lesson: Trust and obedience to God lead to blessings and forgiveness.</p>
+        <ul>
+            <li>Obeying God's call brings blessings to others and yourself.</li>
+            <li>Running away from responsibility can lead to challenges, but repentance offers redemption.</li>
+        </ul>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('sceneReflection')">Reflection</button>
+        </div>
+    </div>
+
+    <!-- Quiz Scene -->
+    <div id="sceneQuiz" class="scene">
+        <p>Quiz: What lesson did Jonah learn?</p>
+        <div class="choice-container">
+            <button class="choice" onclick="checkAnswer('A')">A. Trust and obey God</button>
+            <button class="choice" onclick="checkAnswer('B')">B. Run away forever</button>
+        </div>
+        <p id="quizFeedback" style="margin-top: 10px;"></p>
+        <div class="choice-container">
+            <button class="choice" onclick="goToScene('scene1')">Replay Story</button>
+        </div>
+    </div>
+
+    <!-- Log Section -->
+    <div id="choiceLog">
+        <h3>Your Choices:</h3>
+        <ul id="logList"></ul>
+    </div>
+
+    <!-- JavaScript -->
     <script>
         function goToScene(sceneId) {
-            // Get all scenes and hide them
             const scenes = document.querySelectorAll('.scene');
             scenes.forEach(scene => scene.classList.remove('active'));
-
-            // Show the target scene
             const targetScene = document.getElementById(sceneId);
             if (targetScene) {
                 targetScene.classList.add('active');
+                logChoice(sceneId);
             }
         }
 
-        // Initialize the first scene
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstScene = document.querySelector('.scene');
-            if (firstScene) {
-                firstScene.classList.add('active');
+        function logChoice(sceneId) {
+            const logList = document.getElementById('logList');
+            const messages = {
+                scene2A: 'Chose to obey God and go to Nineveh',
+                scene2B: 'Ran away and boarded a ship',
+                scene3A: 'Thrown into the sea',
+                scene3B: 'Tried rowing back to shore'
+            };
+            if (messages[sceneId]) {
+                const listItem = document.createElement('li');
+                listItem.textContent = messages[sceneId];
+                logList.appendChild(listItem);
             }
-        });
+        }
+
+        function checkAnswer(answer) {
+            const feedback = document.getElementById('quizFeedback');
+            if (answer === 'A') {
+                feedback.textContent = "Correct! Trust and obedience lead to blessings.";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Try again! What happened when Jonah ran away?";
+                feedback.style.color = "red";
+            }
+        }
     </script>
 </body>
 </html>
-
